@@ -26,4 +26,12 @@ jobs:
           nslookup restaurant1.rms360.com
 
       - name: Start server
-        run: npm run start -- --port 3001 --domain restaurant1.rms360.com
+        env:
+          CI: false
+        run: npm run start -- --port 433 --domain restaurant1.rms360.com
+
+      - name: Verify server is running
+        run: |
+          curl -s https://restaurant1.rms360.com
+          echo "Server is running"
+          
