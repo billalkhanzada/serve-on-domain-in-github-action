@@ -20,6 +20,9 @@ jobs:
       - name: Set up hosts file to resolve domain
         run: |
           echo "0.0.0.0 restaurant1.rms360.com" | sudo tee -a /etc/hosts
+          echo "::1 restaurant1.rms360.com" | sudo tee -a /etc/hosts
+          sudo systemctl restart systemd-resolved
+          sudo service networking restart
 
       - name: Verify DNS resolution
         run: |
