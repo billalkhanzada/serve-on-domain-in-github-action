@@ -1,0 +1,27 @@
+name: Build and Test
+
+on: push
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build
+        run: npm run build --verbose
+
+      - name: Set up hosts file to resolve domain
+        run: |
+          echo "127.0.0.1 restaurant1.rms360.com" | sudo tee -a /etc/hosts
+
+      - name: Verify DNS resolution
+        run: |
+          nslookup restaurant1.rms360.com
+
+      - name: Start server
+        run: npm run start -- --port 3001 --domain restaurant1.rms360.com
