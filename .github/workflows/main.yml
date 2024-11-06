@@ -28,7 +28,7 @@ jobs:
       - name: Start server
         env:
           CI: false
-        run: npm run start -- --port 433 --domain restaurant1.rms360.com
+        run: npm run start -- --port 433 --domain restaurant1.rms360.com &
 
       - name: Verify server is running
         run: |
