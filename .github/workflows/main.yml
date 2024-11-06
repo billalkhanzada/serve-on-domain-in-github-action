@@ -19,11 +19,14 @@ jobs:
 
       - name: Set up hosts file to resolve domain
         run: |
-          echo "127.0.0.1 restaurant1.rms360.com" | sudo tee -a /etc/hosts
+          echo "0.0.0.0 restaurant1.rms360.com" | sudo tee -a /etc/hosts
 
       - name: Verify DNS resolution
         run: |
           nslookup restaurant1.rms360.com
+
+      - name: Verify hosts file
+        run: cat /etc/hosts
 
       - name: Start server
         env:
@@ -32,7 +35,7 @@ jobs:
 
       - name: Wait for server to start
         run: |
-          sleep 20
+          sleep 5
           echo "Server started"
 
       - name: Verify server is running
